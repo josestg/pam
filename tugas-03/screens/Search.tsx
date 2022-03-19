@@ -3,8 +3,17 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { IconInput } from "../components/inputs";
 import { SolidButton } from "../components/buttons";
+import { NavigationProp } from "@react-navigation/native";
 
-export const SearchScreen: React.FC = () => {
+export interface SearchScreenProps {
+  navigation: NavigationProp<any, any>;
+}
+
+export const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
+  const handleSearch = () => {
+    navigation.navigate("Browser");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.backgroundContainer} />
@@ -27,7 +36,7 @@ export const SearchScreen: React.FC = () => {
           placeholder="Tanggal Keberangkatan"
         />
 
-        <SolidButton title="Cari" onPress={() => {}} />
+        <SolidButton title="Cari" onPress={() => handleSearch()} />
       </View>
 
       <View style={styles.footer}>
@@ -65,7 +74,7 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     position: "absolute",
-    bottom: 16,
+    bottom: 8,
     padding: 18,
     alignItems: "center",
     justifyContent: "center",

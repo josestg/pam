@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HeaderIcon } from "./components/headers";
 
-import { SearchScreen } from "./screens";
+import { BrowserScreen, SearchScreen } from "./screens";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +32,7 @@ export default function App() {
             },
           }}
         />
+        <Stack.Screen name="Browser" component={BrowserScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

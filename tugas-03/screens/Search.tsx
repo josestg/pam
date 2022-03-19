@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { IconInput } from "../components/inputs";
@@ -10,8 +10,16 @@ export interface SearchScreenProps {
 }
 
 export const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
+  const [date, setDate] = useState("");
+
   const handleSearch = () => {
-    navigation.navigate("Browser");
+    navigation.navigate("Browser", {
+      source,
+      destination,
+      date,
+    });
   };
 
   return (
@@ -20,20 +28,26 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
       <Text style={styles.header}>Hiling.id</Text>
       <View style={styles.formContainer}>
         <IconInput
+          value={source}
           label="Lokasi Keberangkantan"
           icon={require("../assets/takeoff.png")}
           placeholder="Pilih lokasi keberangkatan"
+          onChangeText={setSource}
         />
 
         <IconInput
+          value={destination}
           label="Lokasi Tujuan"
           icon={require("../assets/landing.png")}
           placeholder="Pilih lokasi tujuan"
+          onChangeText={setDestination}
         />
         <IconInput
+          value={date}
           label="Tanggal"
           icon={require("../assets/calendar.png")}
           placeholder="Tanggal Keberangkatan"
+          onChangeText={setDate}
         />
 
         <SolidButton title="Cari" onPress={() => handleSearch()} />

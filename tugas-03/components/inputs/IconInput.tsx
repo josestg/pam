@@ -12,6 +12,8 @@ interface IconInputProps {
   icon: ImageSourcePropType;
   placeholder: string;
   label: string;
+  value: string;
+  onChangeText: (text: string) => void;
 }
 
 export const IconInput: React.FC<IconInputProps> = (props) => {
@@ -21,10 +23,12 @@ export const IconInput: React.FC<IconInputProps> = (props) => {
       <View style={styles.formContainer}>
         <Image style={styles.icon} source={props.icon} />
         <TextInput
+          value={props.value}
           style={styles.textInput}
           editable={true}
           maxLength={40}
           placeholder={props.placeholder}
+          onChangeText={props.onChangeText}
         />
       </View>
     </View>

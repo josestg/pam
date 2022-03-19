@@ -10,15 +10,25 @@ import {
 import { TicketCard } from "../components/cards/TicketCard";
 import { Ticket } from "../data/data";
 import { retrieveOpenTickets } from "../data/tickets";
+import { NavigationProp, RouteProp } from "@react-navigation/native";
 
-export const BrowserScreen: React.FC = () => {
+export interface BrowserScreenProps {
+  navigation: NavigationProp<any, any>;
+  route: RouteProp<{
+    params: { date: string; source: string; destination: string };
+  }>;
+}
+
+export const BrowserScreen: React.FC<BrowserScreenProps> = ({ route }) => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
 
+  const { date, destination, source } = route.params;
+
   useEffect(() => {
-    retrieveOpenTickets("", "", new Date())
+    retrieveOpenTickets(source, destination, new Date(date))
       .then((data) => setTickets(data))
       .catch(console.log);
-  }, []);
+  }, [date, destination, source]);
 
   const handleChooseTicket = (ticket: Ticket) => {
     alert(ticket.id);
